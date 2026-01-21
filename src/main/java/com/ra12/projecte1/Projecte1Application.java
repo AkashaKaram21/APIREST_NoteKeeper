@@ -1,4 +1,4 @@
-package com.ra12.projecte1.projecte1;
+package com.ra12.projecte1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
