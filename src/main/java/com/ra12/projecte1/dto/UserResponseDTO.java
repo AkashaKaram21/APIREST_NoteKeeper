@@ -1,18 +1,9 @@
-package com.ra12.projecte1.model;
+package com.ra12.projecte1.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.GenerationType;
-
-@Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserResponseDTO {
     private long id;
     private String name;
     private String email;
-    private String password;
     private String imagePath;
     
     public long getId() {
@@ -32,12 +23,6 @@ public class User {
     }
     public void setEmail(String email) {
         this.email = email;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
     }
     public String getImagePath() {
         return imagePath;
