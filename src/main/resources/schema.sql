@@ -5,5 +5,5 @@ create table users (
     name varchar(100) not null,
     email varchar(100) not null unique,
     password varchar(100) not null,
-    imagePath varchar(100) null,
+    imagePath varchar(100) null
 );

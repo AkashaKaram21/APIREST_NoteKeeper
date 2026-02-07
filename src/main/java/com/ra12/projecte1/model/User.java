@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.GenerationType;
 
+// Representació en forma d'objecte d'un usuari
 @Entity
 public class User {
     @Id
@@ -44,5 +45,10 @@ public class User {
     }
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", imagePath="
+                + imagePath + "]";
     }
 }

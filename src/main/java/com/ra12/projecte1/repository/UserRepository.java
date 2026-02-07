@@ -17,25 +17,34 @@ public class UserRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    // Custom RowMapper per tornar tots els resultats d'una query de SQL en una llista d'usuaris
     private static final class UserRowMapper implements RowMapper<User> {
 
         @Override
-        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+        public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
             User user = new User();
-            user.setId(rs.getLong("id"));
-            user.setName(rs.getString("name"));
-            user.setEmail(rs.getString("email"));
-            user.setPassword(rs.getString("password"));
+            user.setId(resultSet.getLong("id"));
+            user.setName(resultSet.getString("name"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPassword(resultSet.getString("password"));
+
             return user;
         }
     }
 
-     public User getUserById(long userId) {        
+    // Funcio de debug perque no tinc el codi d'afegir / obtenir usuaris
+    public void insertUser(User user) {
+        jdbcTemplate.update("insert into users (name, email, password, imagePath) values (?, ?, ?, ?)", user.getName(), user.getEmail(), user.getPassword(), user.getImagePath());
+    }
+
+    // Funcio de debug perque no tinc el codi d'afegir / obtenir usuaris
+    public User getUserById(long userId) {        
         List<User> users = jdbcTemplate.query("select * from users where id = ?", new UserRowMapper(), userId);
             
         return users.isEmpty() ? null : users.get(0);
     }
 
+    // Obtenir 
     public User getUserByUserRequestDTO(UserRequestDTO userRequest) {        
         List<User> users = jdbcTemplate.query("select * from users where email = ?", new UserRowMapper(), userRequest.getEmail());
 
@@ -50,7 +59,7 @@ public class UserRepository {
         jdbcTemplate.update("delete from users");
     }
 
-    public void deleteAllUsers(long userId) {
+    public void deleteUser(long userId) {
         jdbcTemplate.update("delete from users where id = ?", userId);
     }
 }
