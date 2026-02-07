@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -75,6 +74,7 @@ public class UserService {
     // Si l'usuari existeix i els canvis no son nulls i són diferents als valors
     // actuals, es cambiaran
     public ResponseEntity<String> updateUser(long userId, User updatedUser) throws Exception {
+        userLogging.logInfo("Actualitzant usuari amb la id: " + userId);
 
         User user = userRepository.getUserById(userId);
 

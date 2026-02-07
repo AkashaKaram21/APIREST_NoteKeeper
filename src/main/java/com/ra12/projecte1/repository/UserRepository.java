@@ -99,7 +99,7 @@ public class UserRepository {
 
     // Obtencio d'una llista de tots els usuaris
     public List<User> findAll() {
-        String sql = "SELECT email, password FROM users";
+        String sql = "select * from users";
         return jdbcTemplate.query(sql, new UserRowMapper());
     }
 }

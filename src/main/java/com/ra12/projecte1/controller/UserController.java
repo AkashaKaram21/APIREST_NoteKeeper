@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ra12.projecte1.service.UserService;
+
 import com.ra12.projecte1.dto.UserRequestDTO;
 import com.ra12.projecte1.dto.UserResponseDTO;
 import com.ra12.projecte1.logging.UserLogging;
@@ -40,7 +41,7 @@ public class UserController {
 
     // Endpoint per pujar l'imatge d'un usuari a través del seu DTO de request (email i password)
     @PostMapping("/users/image")
-    public ResponseEntity<String> setUserImage(@RequestParam String email, @RequestParam String password, @RequestParam MultipartFile imageFile) throws Exception {
+    public ResponseEntity<String> setUserImage(@RequestParam String email, @RequestParam String password, @RequestBody MultipartFile imageFile) throws Exception {
         UserRequestDTO userRequest = new UserRequestDTO(email, password);
 
         return userService.setUserImage(userRequest, imageFile);
@@ -60,7 +61,7 @@ public class UserController {
     }
 
     // Endpoint per borrar tots els usuaris
-    @DeleteMapping("/users/delete")
+    @DeleteMapping("/users")
     public ResponseEntity<String> deleteAllUsers() throws Exception {
         return userService.deleteAllUsers();
     }
@@ -143,7 +144,7 @@ public class UserController {
 
     // Obtenim usuari a traves de la seva userId
     @GetMapping("/users/{userId}")
-    public ResponseEntity<String> getUserByEmail(@PathVariable long userId) {
+    public ResponseEntity<String> getUserById(@PathVariable long userId) {
         return userService.getUser(userId);
     }
 }
